@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.chaupat-board {
+  aspect-ratio: 1 / 1;
+}
+
+@keyframes troopHover {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-7px) scale(1.16); }
+}
+.troop-hover {
+  animation: troopHover 0.55s ease-in-out infinite;
+  outline: 2px solid white;
+  box-shadow: 0 0 12px #fbbf24 !important;
+}
+
+@keyframes troopArrive {
+  0% { transform: scale(0.25); opacity: 0.25; }
+  65% { transform: scale(1.18); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.troop-idle { animation: troopArrive 0.28s ease-out; }
+
+@keyframes troopStep {
+  0% { transform: scale(0.72); opacity: 0.55; }
+  55% { transform: scale(1.16); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.troop-step { animation: troopStep 0.32s ease-out; }
+
+@keyframes killFlash {
+  0% { background-color: rgba(239, 68, 68, 0.9); opacity: 1; }
+  55% { background-color: rgba(127, 29, 29, 0.75); opacity: 0.9; }
+  100% { background-color: rgba(239, 68, 68, 0); opacity: 0; }
+}
+.kill-effect {
+  background: rgba(239, 68, 68, 0.8);
+  animation: killFlash 0.7s ease-out forwards;
+  pointer-events: none;
+}
+
+/* Highlight the panel of the player whose turn it is. */
+@keyframes panelGlow {
+  0%, 100% { box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.95), inset 0 0 18px 4px rgba(255, 255, 255, 0.4); }
+  50% { box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.95), inset 0 0 34px 10px rgba(255, 255, 255, 0.75); }
+}
+.panel-active { animation: panelGlow 1.6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .troop-hover, .troop-idle, .troop-step, .kill-effect, .panel-active, .dest-cell, .dest-ring, .rank-row, .rank-first, .rank-banner, .trophy-title, .stat-bar, .results-fade {
+    animation: none !important;
+  }
+}
+
+/* Destination block shown while hovering a move. */
+@keyframes destPulse {
+  0%, 100% { box-shadow: inset 0 0 0 4px #f59e0b, inset 0 0 12px 3px rgba(245, 158, 11, 0.5); }
+  50% { box-shadow: inset 0 0 0 4px #fde68a, inset 0 0 26px 10px rgba(245, 158, 11, 0.85); }
+}
+.dest-cell { animation: destPulse 0.9s ease-in-out infinite; }
+@keyframes destSpin { to { transform: rotate(360deg); } }
+.dest-ring { animation: destSpin 4s linear infinite; }
+
+/* Winner banner in a finished player's panel. */
+@keyframes bannerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
+.rank-banner { animation: bannerPulse 1.4s ease-in-out infinite; }
+
+/* Results screen. */
+@keyframes resultsFade { from { opacity: 0; } to { opacity: 1; } }
+.results-fade { animation: resultsFade 0.5s ease-out both; }
+
+@keyframes trophyBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.trophy-title { animation: trophyBounce 1.6s ease-in-out infinite; }
+
+@keyframes rankIn {
+  from { opacity: 0; transform: translateX(-60px) scale(0.96); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+.rank-row { animation: rankIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+
+@keyframes firstGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.7); }
+  50% { box-shadow: 0 0 22px 6px rgba(250, 204, 21, 0.8); }
+}
+.rank-first { animation: rankIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both, firstGlow 1.8s ease-in-out 1s infinite; }
+
+@keyframes barGrow { from { width: 0; } to { width: var(--w); } }
+.stat-bar { animation: barGrow 1s ease-out both; animation-delay: var(--d, 0s); }
