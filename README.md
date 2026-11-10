@@ -2,7 +2,7 @@
 
 **Chaupat** is a free online board game for 2 to 4 players. It is similar to Ludo, but with four coins instead of a dice, "double troops" that can only be killed by other doubles, a safe-block system, and an inner grid that you only unlock by lapping the board three times or by making a kill.
 
-Play it online: **https://YOUR-DOMAIN.vercel.app** (replace with your Vercel URL)
+Play it online: **https://chaupat-five.vercel.app**
 
 ---
 
@@ -328,7 +328,7 @@ Saved games are stored under the `chaupat-save-v2` key in `localStorage`.
 ## Deploying on Vercel and getting found on Google
 
 1. Push the repo to GitHub and import it on [vercel.com/new](https://vercel.com/new). Vercel detects Vite automatically (build command `npm run build`, output `dist`).
-2. Replace every `https://YOUR-DOMAIN.vercel.app` in `index.html`, `public/robots.txt` and `public/sitemap.xml` with your real URL.
+2. Keep the site URL in `index.html`, `public/robots.txt` and `public/sitemap.xml` in sync with your live address (currently `https://chaupat-five.vercel.app`). If you add a custom domain, update it in all three.
 3. Add a 1200x630 `public/og-image.png` for link previews.
 4. Add your site in [Google Search Console](https://search.google.com/search-console), submit `sitemap.xml`, and use **URL inspection > Request indexing** for the home page.
 5. Put the live link in your GitHub repo description and website field, and in your README, portfolio and social profiles. Links from other sites help a lot.
