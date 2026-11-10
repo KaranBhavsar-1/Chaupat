@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   newGame, roll, legalMoves, applyMove, split, splittable,
   cellOf, isYard, cur, INNER, HEX, movePath,
-} from './engine';
+} from './Engine';
 
 const SAVE_KEY = 'chaupat-save-v2'; // v2: new engine state (ranks, stats)
 
