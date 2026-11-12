@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   newGame, roll, legalMoves, applyMove, split, splittable,
-  cellOf, isYard, cur, INNER, HEX, movePath,
+  cellOf, isYard, cur, INNER, HEX, movePath,TURN_ORDER,
 } from './Engine';
 import PlayerCountScreen from './components/setup/PlayerCountScreen';
 import PlayerSetupScreen from './components/setup/PlayerSetupScreen';
@@ -72,19 +72,41 @@ export default function App() {
     return () => window.clearTimeout(timer);
   }, [g, animating]);
   
-  const startNew = (configs) => {
-    if (animating) return;
-    setG(newGame(configs.length, configs));
-    setTosses({});
-    setPick(null);
-    setHoveredTroops([]);
-    setKillCells([]);
-    setVisualPositions({});
-    setChoices(null);
-    setHoverDest(null);
-    setShowResults(false);
-    setView('game');
-  };
+  // const startNew = (configs) => {
+  //   if (animating) return;
+  //   setG(newGame(configs.length, configs));
+  //   setTosses({});
+  //   setPick(null);
+  //   setHoveredTroops([]);
+  //   setKillCells([]);
+  //   setVisualPositions({});
+  //   setChoices(null);
+  //   setHoverDest(null);
+  //   setShowResults(false);
+  //   setView('game');
+  // };
+
+const startNew = (configs) => {
+  if (animating) return;
+
+  // Sort players according to their anti-clockwise board positions.
+  const orderedConfigs = [...configs].sort(
+    (a, b) => TURN_ORDER.indexOf(a.color) - TURN_ORDER.indexOf(b.color)
+  );
+
+  // Create game with the correct turn order.
+  setG(newGame(orderedConfigs.length, orderedConfigs));
+
+  setTosses({});
+  setPick(null);
+  setHoveredTroops([]);
+  setKillCells([]);
+  setVisualPositions({});
+  setChoices(null);
+  setHoverDest(null);
+  setShowResults(false);
+  setView('game');
+};
 
   if (view === 'player-count') {
     return (

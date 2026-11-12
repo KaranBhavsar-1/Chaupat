@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react';
-import { COLORS, HEX } from '../../Engine';
+import { COLORS, HEX ,SEATS } from '../../Engine';
 
 export default function PlayerSetupScreen({ playerCount, onBack, onStart }) {
-  const initialColors = ['cyan', 'yellow', 'green', 'red'].slice(0, playerCount);
+  // const initialColors = ['cyan', 'yellow', 'green', 'red'].slice(0, playerCount);
+  // const initialColors = ['cyan', 'red', 'yellow', 'green'].slice(0, playerCount);
+  const initialColors = SEATS[playerCount].slice();
   const [players, setPlayers] = useState(() =>
     Array.from({ length: playerCount }, (_, index) => ({
       name: '',

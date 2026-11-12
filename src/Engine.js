@@ -1,4 +1,19 @@
+// export const COLORS = ['yellow', 'green', 'cyan', 'red'];
+// export const HEX = {
+//   yellow: '#eab308',
+//   green: '#22c55e',
+//   cyan: '#06b6d4',
+//   red: '#ef4444',
+// };
+
+// export const SEATS = {
+//   2: ['yellow', 'cyan'],
+//   3: ['yellow', 'green', 'cyan'],
+//   4: COLORS,
+// };
+
 export const COLORS = ['yellow', 'green', 'cyan', 'red'];
+
 export const HEX = {
   yellow: '#eab308',
   green: '#22c55e',
@@ -6,10 +21,14 @@ export const HEX = {
   red: '#ef4444',
 };
 
+// Anti-clockwise order around the board.
+export const TURN_ORDER = ['cyan', 'red', 'yellow', 'green'];
+
+// Default player positions for each player count.
 export const SEATS = {
-  2: ['yellow', 'cyan'],
-  3: ['yellow', 'green', 'cyan'],
-  4: COLORS,
+  2: ['cyan', 'yellow'],
+  3: ['cyan', 'yellow', 'green'],
+  4: TURN_ORDER,
 };
 
 const OFF = { yellow: 0, green: 4, cyan: 8, red: 12 };
