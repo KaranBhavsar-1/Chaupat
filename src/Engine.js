@@ -53,10 +53,24 @@ export function cellOf(color, troop) {
   return RING[(OFF[color] + troop.p) % 16];
 }
 
-export function newGame(numberOfPlayers) {
+export function newGame(numberOfPlayers, playerConfigs = null) {
+  const configs = playerConfigs?.length
+    ? playerConfigs
+    : SEATS[numberOfPlayers].map((color, index) => ({ color, name: `Player ${index + 1}` }));
+
+  if (configs.length !== numberOfPlayers) {
+    throw new Error('Player configuration does not match the selected player count.');
+  }
+  const selectedColors = configs.map((player) => player.color);
+  if (new Set(selectedColors).size !== selectedColors.length ||
+      selectedColors.some((color) => !COLORS.includes(color))) {
+    throw new Error('Each player must have a unique valid color.');
+  }
+
   return {
-    players: SEATS[numberOfPlayers].map((color) => ({
-      color,
+    players: configs.map((config, index) => ({
+      color: config.color,
+      name: config.name?.trim() || `Player ${index + 1}`,
       laps: 0,
       kills: 0, // kill events (used for the inner-grid rule)
       moved: 0, // total blocks walked by this player's troops
